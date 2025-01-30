@@ -18,3 +18,11 @@
 ![](./outputs/Task3.png)
 
 ---
+
+### Task 4 -  Write a program where multiple threads try to write to the same resource (e.g., increment a shared variable). Use Mutex to ensure that only one thread can access the critical section at a time. Print the value of the shared variable after all threads have completed.
+![](./outputs/Task4.png)
+
+---
+
+
+
