@@ -7,9 +7,21 @@ class BankAccount
     private string _holderName;
     private decimal _balance;
 
-    public string AccountNumber => _accountNumber;
-    public string HolderName => _holderName;
-    public decimal Balance => _balance;  // Read-only balance
+    // Properties using normal get accessor
+    public string AccountNumber
+    {
+        get { return _accountNumber; }
+    }
+
+    public string HolderName
+    {
+        get { return _holderName; }
+    }
+
+    public decimal Balance
+    {
+        get { return GetBalance(); }
+    }
 
     // Constructor
     public BankAccount(string accountNumber, string holderName, decimal initialBalance)
@@ -18,6 +30,12 @@ class BankAccount
         _holderName = holderName;
         _balance = initialBalance;
         Console.WriteLine($"Account Created: {accountNumber}, Holder: {holderName}, Balance: {initialBalance}");
+    }
+
+    // Method to return balance (used in the get accessor)
+    public decimal GetBalance()
+    {
+        return _balance;
     }
 
     // Deposit method
@@ -72,8 +90,7 @@ class BankAccount
         set { Withdraw(value); }  // Calls Withdraw() inside setter
     }
 
-
-    // Destructor (optional, as we use IDisposable)
+    // Destructor
     ~BankAccount()
     {
         try
@@ -116,7 +133,6 @@ class Program
                 Console.WriteLine($"Account: {account.AccountNumber}, Holder: {account.HolderName}, Balance: {account.Balance}");
             }
 
-            accountsList = null;
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }
