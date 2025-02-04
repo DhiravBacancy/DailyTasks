@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-class BankAccount : IDisposable
+class BankAccount
 {
     private string _accountNumber;
     private string _holderName;
@@ -72,20 +72,6 @@ class BankAccount : IDisposable
         set { Withdraw(value); }  // Calls Withdraw() inside setter
     }
 
-    // Dispose method to handle cleanup
-    public void Dispose()
-    {
-        try
-        {
-            // Cleanup code
-            Console.WriteLine($"Account {AccountNumber} is closed.");
-            GC.SuppressFinalize(this);  // Suppress finalization since we handled it manually
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error during disposal: {ex.Message}");
-        }
-    }
 
     // Destructor (optional, as we use IDisposable)
     ~BankAccount()
@@ -130,11 +116,9 @@ class Program
                 Console.WriteLine($"Account: {account.AccountNumber}, Holder: {account.HolderName}, Balance: {account.Balance}");
             }
 
-            // Explicitly disposing accounts
-            foreach (var account in accountsList)
-            {
-                account.Dispose();
-            }
+            accountsList = null;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
         catch (Exception ex)
         {
