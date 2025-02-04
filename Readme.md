@@ -32,7 +32,7 @@
 
 # OOPs 
 ### Task 1 - Banking System using OOPs concepts....
-![](./ouputs/OPPsTask1.png) 
+![](./outputs/OPPsTask1.png) 
 
 
 
