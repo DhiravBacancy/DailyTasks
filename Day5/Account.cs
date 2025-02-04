@@ -61,7 +61,7 @@ namespace Day5
         // Order --- 0 for Ascending & 1 for Descending
         public static void sortAccByBalance()
         {
-            Console.WriteLine("Enter 1 for acscending and 2 for dscending");
+            Console.WriteLine("Enter 1 for ascending and 2 for descending");
             int order = Convert.ToInt32(Console.ReadLine());
             if (order == 1)
             {
