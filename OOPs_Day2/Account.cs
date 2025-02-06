@@ -23,6 +23,25 @@ namespace OOPs_Day2
         }
     }
 
+
+    public partial class AccountOperations 
+    {
+        //public AccountOperations(string accNo, string holderName, decimal balance) : base(accNo, holderName, balance) { }
+
+        public decimal CheckBalance(Account acc)
+        {
+            try
+            {
+                return acc.Balance;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking balance: {ex.Message}");
+                return 0;
+            }
+        }
+    }
+
     public class Account
     {
         private string _accountNumber;
@@ -110,25 +129,6 @@ namespace OOPs_Day2
                 Console.WriteLine($"Error calculating interest: {ex.Message}");
             }
         }
-
-        public void Withdraw(decimal amount)
-        {
-            try
-            {
-                if (amount <= 0)
-                    throw new ArgumentException("Withdrawal amount must be positive.");
-                if (amount > this.Balance)
-                    throw new InvalidOperationException("Insufficient balance.");
-
-                Balance -= amount;
-                AddTransaction($"{amount} Withdrawn from account, Updated Balance: {this.Balance}");
-                Console.WriteLine($"Withdrawn: {amount}. New Balance: {Balance}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error processing withdrawal: {ex.Message}");
-            }
-        }
     }
 
     class CurrentAccount : Account
@@ -158,42 +158,12 @@ namespace OOPs_Day2
                 Console.WriteLine($"Error calculating interest: {ex.Message}");
             }
         }
-
-        public void Withdraw(decimal amount)
-        {
-            try
-            {
-                if (amount <= 0)
-                    throw new ArgumentException("Withdrawal amount must be positive.");
-                if (amount > this.Balance)
-                    throw new InvalidOperationException("Insufficient balance.");
-
-                Balance -= amount;
-                AddTransaction($"{amount} Withdrawn from account, Updated Balance: {this.Balance}");
-                Console.WriteLine($"Withdrawn: {amount}. New Balance: {Balance}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error processing withdrawal: {ex.Message}");
-            }
-        }
     }
 
-    public partial class AccountOperations : Account
-    {
-        public AccountOperations(string accNo, string holderName, decimal balance) : base(accNo, holderName, balance) { }
-
-        public decimal CheckBalance()
-        {
-            try
-            {
-                return Balance;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error checking balance: {ex.Message}");
-                return 0;
-            }
-        }
-    }
 }
+
+
+
+
+//SavingsAccount(with interest calculation).
+//CurrentAccount(with overdraft limit).

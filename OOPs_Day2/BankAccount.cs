@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OOPs_Day2
+﻿namespace OOPs_Day2
 {
     class BankAccount : BankServices, IBankingOperations
     {
@@ -86,7 +80,7 @@ namespace OOPs_Day2
 
         decimal IBankingOperations.GetBalance()
         {
-            return _balance;
+            return Balance;
         }
     }
 
@@ -106,16 +100,16 @@ namespace OOPs_Day2
         decimal GetBalance();
     }
 
-    public partial class AccountOperations : Account
+    public partial class AccountOperations
     {
-        public void Deposit(decimal amount)
+        public void Deposit(Account acc, decimal amount)
         {
             try
             {
                 if (amount <= 0)
                     throw new ArgumentException("Deposit amount must be positive.");
-                Balance += amount;
-                Console.WriteLine($"Deposited: {amount}. New Balance: {Balance}");
+                acc.Balance += amount;
+                Console.WriteLine($"Deposited: {amount}. New Balance: {acc.Balance}");
             }
             catch (Exception ex)
             {
@@ -123,16 +117,16 @@ namespace OOPs_Day2
             }
         }
 
-        public void Withdraw(decimal amount)
+        public void Withdraw(Account acc, decimal amount)
         {
             try
             {
                 if (amount <= 0)
                     throw new ArgumentException("Withdrawal amount must be positive.");
-                if (amount > Balance)
+                if (amount > acc.Balance)
                     throw new InvalidOperationException("Insufficient balance.");
-                Balance -= amount;
-                Console.WriteLine($"Withdrawn: {amount}. New Balance: {Balance}");
+                acc.Balance -= amount;
+                Console.WriteLine($"Withdrawn: {amount}. New Balance: {acc.Balance}");
             }
             catch (Exception ex)
             {

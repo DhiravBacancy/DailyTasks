@@ -10,6 +10,7 @@ namespace OOPs_Day2
             {
                 // Create a Transaction Logger
                 TransactionLogger logger = new TransactionLogger();
+                AccountOperations accountOperations = new AccountOperations();
 
                 // User input for Savings Account
                 Console.Write("Enter Savings Account Number: ");
@@ -18,16 +19,18 @@ namespace OOPs_Day2
                 string savingsHolderName = Console.ReadLine();
                 Console.Write("Enter Initial Balance: ");
                 decimal savingsBalance = decimal.Parse(Console.ReadLine());
-
                 SavingsAccount savingsAccount = new SavingsAccount(savingsAccNo, savingsHolderName, savingsBalance);
                 savingsAccount.DisplayAccountInfo();
                 savingsAccount.CalculateInterest();
                 Console.Write("Enter amount to withdraw from Savings Account: ");
                 decimal savingsWithdraw = decimal.Parse(Console.ReadLine());
-                savingsAccount.Withdraw(savingsWithdraw);
+                accountOperations.Withdraw(savingsAccount, savingsWithdraw);
+                Console.Write("Enter amount to withdraw from Savings Account: ");
+                decimal savingsDeposit = decimal.Parse(Console.ReadLine());
+                accountOperations.Withdraw(savingsAccount, savingsDeposit);
                 Console.WriteLine($"Final Balance in Savings Account: {savingsAccount.Balance}\n");
-
                 logger.LogTransaction(savingsAccount);
+
 
                 // User input for Current Account
                 Console.Write("Enter Current Account Number: ");
@@ -36,35 +39,18 @@ namespace OOPs_Day2
                 string currentHolderName = Console.ReadLine();
                 Console.Write("Enter Initial Balance: ");
                 decimal currentBalance = decimal.Parse(Console.ReadLine());
-
                 CurrentAccount currentAccount = new CurrentAccount(currentAccNo, currentHolderName, currentBalance);
                 currentAccount.DisplayAccountInfo();
                 currentAccount.CalculateInterest();
-                Console.Write("Enter amount to withdraw from Current Account: ");
+                Console.Write("Enter amount to withdraw from Savings Account: ");
                 decimal currentWithdraw = decimal.Parse(Console.ReadLine());
-                currentAccount.Withdraw(currentWithdraw);
-                Console.WriteLine($"Final Balance in Current Account: {currentAccount.Balance}\n");
-
+                accountOperations.Withdraw(currentAccount, currentWithdraw);
+                Console.Write("Enter amount to withdraw from Savings Account: ");
+                decimal currentDeposit = decimal.Parse(Console.ReadLine());
+                accountOperations.Withdraw(currentAccount, currentDeposit);
                 logger.LogTransaction(currentAccount);
 
-                // User input for AccountOperations
-                Console.Write("Enter AccountOperations Account Number: ");
-                string accOpsNo = Console.ReadLine();
-                Console.Write("Enter Holder Name: ");
-                string accOpsHolderName = Console.ReadLine();
-                Console.Write("Enter Initial Balance: ");
-                decimal accOpsBalance = decimal.Parse(Console.ReadLine());
 
-                AccountOperations accountOperations = new AccountOperations(accOpsNo, accOpsHolderName, accOpsBalance);
-                Console.Write("Enter amount to deposit: ");
-                decimal depositAmount = decimal.Parse(Console.ReadLine());
-                accountOperations.Deposit(depositAmount);
-
-                Console.Write("Enter amount to withdraw: ");
-                decimal withdrawAmount = decimal.Parse(Console.ReadLine());
-                accountOperations.Withdraw(withdrawAmount);
-
-                Console.WriteLine($"Balance after operations: {accountOperations.CheckBalance()}\n");
 
                 // User input for BankAccount with IBankingOperations
                 Console.Write("Enter Bank Account Number: ");
