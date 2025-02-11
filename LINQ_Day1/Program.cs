@@ -9,18 +9,18 @@ namespace LINQ_Day1
     {
         public static void Main()
         {
-            List<Customer> staticList = Customer.customerList();
-            Customer.printCustomers(staticList);
+            List<Customer> customerList = Customer.customerList();
+            Customer.printCustomers(customerList);
             printSection();
 
 
             //Query - 1
             //Method Syntax
-            var query1MethodSyntax = staticList.Where(c => c.City == "New York").ToList();
+            var query1MethodSyntax = customerList.Where(c => c.City == "New York").ToList();
             Console.WriteLine("Query 1 Method Syntax:");
             printAnswer(query1MethodSyntax);
             //Query Syntax
-            var query1QuerySyntax = from c in staticList where c.City == "New York" select c;
+            var query1QuerySyntax = from c in customerList where c.City == "New York" select c;
             Console.WriteLine("Query 1 Query Syntax:");
             printAnswer(query1QuerySyntax.ToList());
             printSection();
@@ -28,11 +28,11 @@ namespace LINQ_Day1
 
             ////Query - 2
             //Method Syntax 
-            var query2MethodSyntax = staticList.Where(c => c.Age > 25).OrderBy(c => c.Age).ToList();
+            var query2MethodSyntax = customerList.Where(c => c.Age > 25).OrderBy(c => c.Age).ToList();
             Console.WriteLine("Query 2 Method Syntax:");
             printAnswer(query2MethodSyntax);
             //Query Syntax
-            var query2QuerySyntax = from c in staticList where c.Age > 25 orderby c.Age ascending select c;
+            var query2QuerySyntax = from c in customerList where c.Age > 25 orderby c.Age ascending select c;
             Console.WriteLine("Query 2 Query Syntax:");
             printAnswer(query2QuerySyntax.ToList());
             printSection();
@@ -41,14 +41,14 @@ namespace LINQ_Day1
             //Query - 3
             //Method Syntax 
             int customerId = 10;
-            var query3MethodSyntax = staticList.Where(c => c.Id == customerId)
+            var query3MethodSyntax = customerList.Where(c => c.Id == customerId)
                                                .SelectMany(c => c.OrderList)
                                                .OrderByDescending(o => o.OrderDate)
                                                .ToList();
             Console.WriteLine("\nQuery 3 Method Syntax:");
             printAnswer(query3MethodSyntax);
             //Query Syntax
-            var query3QuerySyntax = from c in staticList
+            var query3QuerySyntax = from c in customerList
                                     where c.Id == customerId
                                     from o in c.OrderList
                                     orderby o.OrderDate descending
@@ -60,12 +60,12 @@ namespace LINQ_Day1
 
             //Query -4
             //Method Syntax 
-            var query4MethodSyntax = staticList.Select(c => new { c.Name, c.City })
+            var query4MethodSyntax = customerList.Select(c => new { c.Name, c.City })
                                                .ToList();
             Console.WriteLine("\nQuery 4 Method Syntax:");
             printAnswer(query4MethodSyntax);
             //Query Syntax
-            var query4QuerySyntax = from c in staticList
+            var query4QuerySyntax = from c in customerList
                                     select new { c.Name, c.City };
             Console.WriteLine("\nQuery 4 Query Syntax:");
             printAnswer(query4QuerySyntax.ToList());
@@ -74,12 +74,12 @@ namespace LINQ_Day1
 
             //Query - 5
             //Method Syntax
-            var query5MethodSyntax = staticList.Select(c => new { c, c.OrderList.Count }).ToList();
+            var query5MethodSyntax = customerList.Select(c => c).ToList();
             Console.WriteLine("\nQuery 5 Method Syntax:");
             printAnswer(query5MethodSyntax);
             //Query Syntax
-            var query5QuerySyntax = from c in staticList
-                                    select new { c, c.OrderList.Count };
+            var query5QuerySyntax = from c in customerList
+                                    select c;
             Console.WriteLine("\nQuery 5 Query Syntax:");
             printAnswer(query5QuerySyntax.ToList());
             printSection();
@@ -87,11 +87,11 @@ namespace LINQ_Day1
 
             //Query 6 
             //Method Syntax
-            var query6MethodSyntax = staticList.SelectMany(c => c.OrderList).ToList();
+            var query6MethodSyntax = customerList.SelectMany(c => c.OrderList).ToList();
             Console.WriteLine("\nQuery 6 Method Syntax:");
             printAnswer(query6MethodSyntax);
             ////Query Syntax
-            var query6QuerySyntax = (from c in staticList
+            var query6QuerySyntax = (from c in customerList
                                      from o in c.OrderList
                                      select o).ToList();
             Console.WriteLine("\nQuery 6 Query Syntax:");
@@ -101,28 +101,28 @@ namespace LINQ_Day1
 
             //Query - 7
             //Method Syntax
-            int totalCustomers = staticList.Count();
-            double averageAge = staticList.Average(c => c.Age);
+            int totalCustomers = customerList.Count();
+            double averageAge = customerList.Average(c => c.Age);
             Console.WriteLine("\nQuery 7 Method Syntax: Total Customers - " + totalCustomers +" Average Age - " + averageAge);
             ////Query Syntax
-            averageAge = (from c in staticList
+            averageAge = (from c in customerList
                           select c.Age).Average();
-            totalCustomers = staticList.Count();
+            totalCustomers = customerList.Count();
             Console.WriteLine("\nQuery 7 Query Syntax: Total Customers - " + totalCustomers + " Average Age - " + averageAge);
             printSection();
 
 
             //Query - 8
             //Method Syntax
-            double minOrder = staticList.SelectMany(c => c.OrderList).Min(o => o.Amount);
-            double maxOrder = staticList.SelectMany(c => c.OrderList).Max(o => o.Amount);
+            double minOrder = customerList.SelectMany(c => c.OrderList).Min(o => o.Amount);
+            double maxOrder = customerList.SelectMany(c => c.OrderList).Max(o => o.Amount);
             Console.WriteLine("\nQuery 8 Method Syntax: Min Order Amount - " + minOrder + " Max Order Amount - " + maxOrder);
             ////Query Syntax
-            minOrder = (from c in staticList
+            minOrder = (from c in customerList
                         from o in c.OrderList
                         select o.Amount).Min();
 
-            maxOrder = (from c in staticList
+            maxOrder = (from c in customerList
                         from o in c.OrderList
                         select o.Amount).Max();
             Console.WriteLine("\nQuery 8 Query Syntax: Min Order Amount - " + minOrder + " Max Order Amount - " + maxOrder);
@@ -131,7 +131,7 @@ namespace LINQ_Day1
 
             //Query - 9
             //Method Syntax
-            var groupedByCity = staticList
+            var groupedByCity = customerList
                                 .GroupBy(c => c.City)
                                 .Select(g => new { City = g.Key, Customers = g.Select(c => c.Name) });
             Console.WriteLine("\nQuery 9 Method Syntax:");
@@ -142,7 +142,7 @@ namespace LINQ_Day1
                 Console.WriteLine();
             }
             //Query Syntax
-            var groupedByCity2 = from c in staticList
+            var groupedByCity2 = from c in customerList
                                  group c.Name by c.City;
             Console.WriteLine("\nQuery 9 Query Syntax:");
             foreach (var group in groupedByCity2)
@@ -156,7 +156,7 @@ namespace LINQ_Day1
 
             //Query - 10
             //Method Syntax
-            var totalOrderAmountByCustomer = staticList
+            var totalOrderAmountByCustomer = customerList
                                             .GroupBy(c => c.Name)
                                             .Select(g => new { CustomerName = g.Key, TotalAmount = g.Sum(c => c.OrderList.Sum(o => o.Amount)) });
             Console.WriteLine("\nQuery 10 Method Syntax:");
@@ -165,7 +165,7 @@ namespace LINQ_Day1
                 Console.WriteLine($"Customer: {customer.CustomerName}, Total Order Amount: {customer.TotalAmount}");
             }
             //Query Syntax
-            var totalOrderAmountByCustomer2 =from c in staticList
+            var totalOrderAmountByCustomer2 =from c in customerList
                                              group c by c.Name into customerGroup
                                              select new
                                              {
