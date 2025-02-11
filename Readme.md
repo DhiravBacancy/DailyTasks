@@ -45,3 +45,11 @@
 ![](./outputs/OOPsTask3.png)
 
 
+---
+---
+
+# LINQ
+### Task - 1 
+![](./outputs/LINQ_Task1A.png)
+![](./outputs/LINQ_Task1B.png)
+

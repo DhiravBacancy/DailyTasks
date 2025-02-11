@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Cache;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LINQ_Day1
 {
@@ -21,18 +17,29 @@ namespace LINQ_Day1
             Name = name;
             Age = age ?? 0;
             City = city;
-            OrderList = orders ?? new List<Order>(); // Ensure a valid list is assigned
+            OrderList = orders ?? new List<Order>();
         }
 
         public static List<Customer> customerList()
         {
             List<Customer> customers = new List<Customer>();
             Random rand = new Random();
+            string[] cities = { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix" };
 
-            for (int i = 1; i <= 20; i++)
+            try
             {
-                List<Order> orders = Order.orderList(rand.Next(1, 4)); // Already ensures a valid list
-                customers.Add(new Customer(i, $"Customer {i}", rand.Next(18, 60), $"City {i}", orders));
+                for (int i = 1; i <= 20; i++)
+                {
+                    string city = (i == 1) ? "New York" : cities[rand.Next(cities.Length)];
+                    int age = rand.Next(18, 60);
+                    List<Order> orders = Order.orderList(rand.Next(1, 4) + 1);
+
+                    customers.Add(new Customer(i, $"Customer {i}", age, city, orders));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error generating customers: {ex.Message}");
             }
 
             return customers;
@@ -40,15 +47,22 @@ namespace LINQ_Day1
 
         public static void printCustomers(List<Customer> staticList)
         {
-            foreach (var customer in staticList)
+            try
             {
-                Console.WriteLine("\n" + customer);
-                Console.WriteLine("Orders:");
-
-                foreach (var order in customer.OrderList) // OrderList is now always initialized
+                foreach (var customer in staticList)
                 {
-                    Console.WriteLine("  " + order);
+                    Console.WriteLine("\n" + customer);
+                    Console.WriteLine("Orders:");
+
+                    foreach (var order in customer.OrderList)
+                    {
+                        Console.WriteLine("  " + order);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error printing customers: {ex.Message}");
             }
         }
 
@@ -58,33 +72,39 @@ namespace LINQ_Day1
         }
     }
 
-
-
     class Order
     {
-        private int _orderId;
-        private double _amount;
-        private DateTime _orderDate;
-
         public int OrderId { get; set; }
         public double Amount { get; set; }
         public DateTime OrderDate { get; set; }
 
         public Order(int orderId, double amount, DateTime orderDate)
         {
-            _orderId = orderId;
-            _amount = amount;
-            _orderDate = orderDate;
+            OrderId = orderId;
+            Amount = amount;
+            OrderDate = orderDate;
         }
+
+        private static Random rand = new Random();
 
         public static List<Order> orderList(int count)
         {
             List<Order> orders = new List<Order>();
-            Random rand = new Random();
 
-            for (int i = 1; i <= count; i++)
+            try
             {
-                orders.Add(new Order(rand.Next(1000, 9999), rand.Next(100, 1000), DateTime.Now.AddDays(-rand.Next(1, 30))));
+                for (int i = 1; i <= count; i++)
+                {
+                    orders.Add(new Order(
+                        rand.Next(1000, 9999),
+                        rand.Next(50, 5000),  // ✅ Amount will now be assigned properly
+                        DateTime.Now.AddDays(-rand.Next(1, 30))
+                    ));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error generating orders: {ex.Message}");
             }
 
             return orders;
@@ -92,8 +112,7 @@ namespace LINQ_Day1
 
         public override string ToString()
         {
-            return $"OrderID: {_orderId}, Amount: {_amount}, Date: {_orderDate.ToShortDateString()}";
+            return $"OrderID: {OrderId}, Amount: {Amount}, Date: {OrderDate.ToShortDateString()}";
         }
     }
-
 }
