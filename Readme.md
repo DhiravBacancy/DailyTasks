@@ -53,3 +53,9 @@
 ![](./outputs/LINQ_Task1A.png)
 ![](./outputs/LINQ_Task1B.png)
 
+---
+
+### Task - 2 
+![](./outputs/LINQ_Task2.png)
+
+
