@@ -127,7 +127,7 @@ namespace LINQ_Day2
                 select new
                 {
                     CustomerName = c.Name,
-                    OrderAmounts = CustomOrders.Select(o => o.TotalAmount).ToList()
+                    OrderAmounts = (from o in CustomOrders select o.TotalAmount).ToList()
                 }).ToList();
             Console.WriteLine("Query 5 (Method Syntax) Output:");
             PrintQueryResults(query5MethodSyntax);
@@ -161,8 +161,8 @@ namespace LINQ_Day2
                 select new
                 {
                     CustomerId = c.CustomerId,
-                    NoOfOrders = customOrders.Count(),
-                    HighestOrderTotalAmount = customOrders.Any() ? customOrders.Max(co => co.TotalAmount) : 0
+                    orderCount = (from co in customOrders select co).Count()
+                    maxOrderTotal = customOrders.Any() ? (from co in customOrders select co.TotalAmount).Max() : 0
                 }
                 ).ToList();
             Console.WriteLine("Query 7 (Method Syntax) Output:");
