@@ -263,6 +263,19 @@ namespace LINQ_Day2
             PrintQueryResults(query13MethodSyntax);
             Console.WriteLine("Query 13 (Query Syntax) Output:");
             PrintQueryResults(query13QuerySyntax);
+
+
+            //Query - 14
+            // Eager Loading (Immediate Execution)
+            var eagerQuery = customerList.Where(c => c.CustomerId > 1).ToList(); // Query executes immediately
+
+            customerList.Add(new Customer( 11,"Emma", "New York" )); // Modify source list
+
+            Console.WriteLine("\nEager Loading Output:");
+            foreach (var customer in eagerQuery) // Data remains unchanged
+            {
+                Console.WriteLine($"{customer.CustomerId} - {customer.Name}");
+            }
         }
 
         public static void PrintQueryResults<T>(List<T> results)
