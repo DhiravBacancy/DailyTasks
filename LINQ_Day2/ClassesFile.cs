@@ -30,11 +30,15 @@ namespace LINQ_Day2
             Random rand = new Random();
             string[] cities = { "New York", "Los Angeles", "Chicago", "Houston", "Phoenix" };
             List<string> names = new List<string>
-    {
-        "Alice", "Bob", "Charlie", "David", "Emily", "Frank", "Grace", "Henry",
-        "Isabella", "Jack", "Kevin", "Laura", "Michael", "Natalie", "Oliver",
-        "Peter", "Quinn", "Rachel", "Sophia", "Thomas"
-    };
+            {
+                "Alice", "Bob", "Charlie", "David", "Emily", "Frank", "Grace", "Henry",
+                "Isabella", "Jack", "Kevin", "Laura", "Michael", "Natalie", "Oliver",
+                "Peter", "Quinn", "Rachel", "Sophia", "Thomas", "Ursula", "Victor", "Wendy",
+                "Xavier", "Yvonne", "Zachary", "Aaron", "Bella", "Caleb", "Diana", "Ethan",
+                "Fiona", "George", "Hannah", "Ian", "Julia", "Kyle", "Liam", "Megan",
+                "Nathan", "Olivia", "Paul", "Queenie", "Ronald", "Sarah", "Tyler", "Uma"
+            };
+
 
             // Shuffle names to ensure a random order
             names = names.OrderBy(_ => rand.Next()).ToList();
@@ -73,11 +77,11 @@ namespace LINQ_Day2
         }
 
 
-        public static void printCustomers()
+        public static void printCustomers(List<Customer> customerList)
         {
             try
             {
-                foreach (var customer in customers)
+                foreach (var customer in customerList)
                 {
                     Console.WriteLine($"\n{customer}");
                     if (customer.Orders.Count > 0)

@@ -10,9 +10,14 @@ namespace LINQ_Day2
             var (customerList, ordersList) = Customer.customerList();
 
             var (anotherCustomerList, anotherOrdersList) = Customer.customerList();
-            
 
-            // Query 1: Join Customers and Orders
+            //Customer.printCustomers(customerList);
+            //Customer.printCustomers(anotherCustomerList);
+
+
+
+            // Query 1:Create a LINQ query that combines customer information
+            //         with their orders. Ensure that only customers who have placed orders appear in the result.
             var query1MethodSyntax = customerList
                 .Join(ordersList,
                     c => c.CustomerId,
@@ -44,7 +49,9 @@ namespace LINQ_Day2
             PrintQueryResults(query1QuerySyntax);
 
 
-            // Query 2: GroupJoin Customers and Orders
+            // Query 2: Create a Grouped Join to show each customer along with all their orders.
+            //          If a customer has no orders, their name should still appear.
+
             var query2MethodSyntax = customerList
                 .GroupJoin(ordersList,
                     c => c.CustomerId,
@@ -72,7 +79,8 @@ namespace LINQ_Day2
             PrintQueryResults(query2QuerySyntax);
 
 
-            // Query 3: SelectMany - Cartesian Product of Customers and Orders
+            // Query 3: Write a query that pairs every customer with every order,
+            //          regardless of any relationship between them.
             var query3MethodSyntax = customerList.SelectMany(
                 c => ordersList,
                 (c, o) => new { c.CustomerId, c.Name, c.City, o.OrderId, o.TotalAmount, o.OrderDate }
@@ -87,7 +95,7 @@ namespace LINQ_Day2
             PrintQueryResults(query3QuerySyntax);
 
 
-            // Query 4: Count Orders per Customer
+            // Query 4: Modify the previous queries to return all customers, whether they have orders or not
             var query4MethodSyntax = customerList
                 .GroupJoin(ordersList,
                     c => c.CustomerId,
@@ -111,7 +119,8 @@ namespace LINQ_Day2
             PrintQueryResults(query4QuerySyntax);
 
 
-            //Query - 5
+            //Query 5 - Write a query to categorize orders by the customer.
+            //Show each customer along with a list of their total order amounts.
             var query5MethodSyntax = customerList
                 .GroupJoin(ordersList,
                     c => c.CustomerId,
@@ -135,7 +144,8 @@ namespace LINQ_Day2
             PrintQueryResults(query5QuerySyntax);
 
 
-            //Query - 6
+            //Query - 6 Use an alternative approach (ToLookup) to group customers and their orders.
+            //          Compare the output with GroupBy.
             var query6MethodSyntax = ordersList.ToLookup(o => o.CustomerId);
             var query6QuerySyntax =(from o in ordersList select o).ToLookup(o => o.CustomerId);
             Console.WriteLine("Query 6 (Method Syntax) Output:");
@@ -144,25 +154,30 @@ namespace LINQ_Day2
             PrintQueryResults(query6QuerySyntax);
 
 
-            //Query - 7
+            //Query - 7 Modify the grouped query to return customer ID, number of orders placed,
+            //          and the highest order amount per customer.
             var query7MethodSyntax = customerList
-                .GroupJoin(ordersList,
+                .Join(ordersList,
                     c => c.CustomerId,
                     o => o.CustomerId,
-                    (c, customOrders) => new
-                    {
-                        CustomerId = c.CustomerId,
-                        NoOfOrders = customOrders.Count(),
-                        HighestOrderTotalAmount = customOrders.Any() ? customOrders.Max(co => co.TotalAmount) : 0 // Avoid exception
-                    }).ToList();
-                var query7QuerySyntax =
+                    (c, o) => new { c.CustomerId, c.Name, o.OrderId, o.TotalAmount })
+                .GroupBy(co => new { co.CustomerId, co.Name })
+                .Select(g => new
+                {
+                    g.Key.CustomerId,
+                    NoOfOrders = g.Count(),
+                    HighestOrderTotalAmount = g.Max(x => x.TotalAmount)
+                }).ToList();
+
+            var query7QuerySyntax =
                 (from c in customerList
-                join o in ordersList on c.CustomerId equals o.CustomerId into customOrders
+                join o in ordersList on c.CustomerId equals o.CustomerId 
+                group o by new { c.CustomerId, c.Name } into groupedOrders
                 select new
                 {
-                    CustomerId = c.CustomerId,
-                    orderCount = (from co in customOrders select co).Count()
-                    maxOrderTotal = customOrders.Any() ? (from co in customOrders select co.TotalAmount).Max() : 0
+                    CustomerId = groupedOrders.Key.CustomerId,
+                    NoOfOrders = groupedOrders.Count(),
+                    HighestOrderTotalAmount = groupedOrders.Max(o => o.TotalAmount)
                 }
                 ).ToList();
             Console.WriteLine("Query 7 (Method Syntax) Output:");
@@ -171,7 +186,7 @@ namespace LINQ_Day2
             PrintQueryResults(query7QuerySyntax);
 
 
-            //Query - 8
+            //Query - 8 Find out which customers have placed an order of at least $1000 using a nested LINQ query.
             var query8MethodSyntax = customerList
                 .Where(c => ordersList.Any(o => o.CustomerId == c.CustomerId && o.TotalAmount >= 1000))
                 .ToList();
@@ -186,16 +201,15 @@ namespace LINQ_Day2
             PrintQueryResults(query8QuerySyntax);
 
 
-            //Query - 9
+            //Query - 9 List all unique cities where customers are located.
             var query9MethodSyntax = customerList
                 .Select(c => c.City)
                 .Distinct()
                 .ToList();
             var query9QuerySyntax =
                 (from c in customerList
-                 select c
-                )
-                .Distinct()
+                 select c.City
+                ).Distinct()
                 .ToList();
             Console.WriteLine("Query 9 (Method Syntax) Output:");
             PrintQueryResults(query9MethodSyntax);
@@ -203,7 +217,7 @@ namespace LINQ_Day2
             PrintQueryResults(query9QuerySyntax);
 
 
-            //Query - 10
+            //Query - 10 Find customers present in the first dataset but not in the second.
             var query10MethodSyntax = customerList
                 .Select(c => c.Name)
                 .Except(anotherCustomerList.Select(c => c.Name))
@@ -219,13 +233,13 @@ namespace LINQ_Day2
             PrintQueryResults(query10QuerySyntax);
 
 
-            //Query - 11
+            //Query - 11 Identify the customers who appear in both datasets.
             var query11MethodSyntax = customerList
-                .Select(c => c.CustomerId)
-                .Intersect(ordersList.Select(o => o.CustomerId))
+                .Select(c => c.Name)
+                .Intersect(anotherCustomerList.Select(a => a.Name))
                 .ToList();
             var query11QuerySyntax = (from c in customerList
-                join o in ordersList on c.CustomerId equals o.CustomerId
+                join a in anotherCustomerList on c.CustomerId equals a.CustomerId
                 select new
                 {
                     CustomerName = c.Name
@@ -237,7 +251,7 @@ namespace LINQ_Day2
             PrintQueryResults(query11QuerySyntax);
 
 
-            //Query - 12
+            //Query - 12 Combine two lists of customers from different datasets while ensuring there are no duplicate names.
             var query12MethodSyntax = customerList
                 .Select(c => c.Name)
                 .Union(anotherCustomerList.Select(c => c.Name))
@@ -251,7 +265,8 @@ namespace LINQ_Day2
             PrintQueryResults(query12QuerySyntax);
 
 
-            //Query - 13
+            //Query - 13 Given a collection of customer names that may contain duplicates,
+            //           write a LINQ query to remove duplicate entries.
             var query13MethodSyntax = customerList
                 .Select(c => c.Name)
                 .Distinct()
@@ -282,6 +297,13 @@ namespace LINQ_Day2
         {
             Console.WriteLine("---------------------------------------------------");
 
+            if (results == null || !results.Any())
+            {
+                Console.WriteLine("No data found.");
+                Console.WriteLine("---------------------------------------------------\n");
+                return;
+            }
+
             foreach (var item in results)
             {
                 if (item == null)
@@ -292,7 +314,7 @@ namespace LINQ_Day2
 
                 var type = typeof(T);
 
-                // ✅ Handle primitive types like string, int, double, etc.
+                // ✅ Handle primitive types directly
                 if (type.IsPrimitive || type == typeof(string))
                 {
                     Console.WriteLine($"  Value: {item}");
@@ -309,10 +331,12 @@ namespace LINQ_Day2
                     {
                         var value = prop.GetValue(item);
 
-                        if (value is IEnumerable<object> collection)
+                        // ✅ Handle collections, ensuring compatibility with List<int>, List<decimal>, etc.
+                        if (value is System.Collections.IEnumerable collection && !(value is string))
                         {
+                            var list = collection.Cast<object>().ToList();
                             Console.Write($"{prop.Name}: ");
-                            Console.Write(collection.Any() ? $"[{string.Join(", ", collection.Select(x => x.ToString()))}]" : "No data found.");
+                            Console.Write(list.Any() ? $"[{string.Join(", ", list)}]" : "No data found.");
                             Console.Write(" ");
                         }
                         else
@@ -331,7 +355,6 @@ namespace LINQ_Day2
 
             Console.WriteLine("---------------------------------------------------\n");
         }
-
 
         public static void PrintQueryResults<TKey, TElement>(ILookup<TKey, TElement> lookup)
         {
