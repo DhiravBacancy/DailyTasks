@@ -291,6 +291,20 @@ namespace LINQ_Day2
             {
                 Console.WriteLine($"{customer.CustomerId} - {customer.Name}");
             }
+
+
+
+            // Lazy loading (query not executed yet)
+            var lazyQuery = customerList.Where(c => c.City == "New York");
+
+            // Adding a new customer after defining the query
+            customerList.Add(new Customer(21, "Emma", "New York"));
+
+            Console.WriteLine("\nLazy Loading Output:");
+            foreach (var customer in lazyQuery) // Query executes here
+            {
+                Console.WriteLine(customer);
+            }
         }
 
         public static void PrintQueryResults<T>(List<T> results)
