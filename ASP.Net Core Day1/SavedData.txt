@@ -25,3 +25,16 @@
   "DateTime": "2025-02-18 14:33:29"
 }
 
+{
+  "Name": "Dhirav",
+  "City": "ahmedabad",
+  "Weather": {
+    "Temperature": "32.1°C",
+    "Condition": "Overcast",
+    "Wind": "18 km/h",
+    "Humidity": "23%",
+    "FeelsLike": "29.9°C"
+  },
+  "DateTime": "2025-02-18 14:59:50"
+}
+
