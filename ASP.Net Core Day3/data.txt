@@ -1,13 +1,13 @@
 {
   "Name": "Dhirav",
-  "City": "bangalore",
+  "City": "rajkot",
   "Weather": {
-    "Temperature": "32.3°C",
+    "Temperature": "32.6°C",
     "Condition": "Sunny",
-    "Wind": "13.3 km/h",
-    "Humidity": "28%",
+    "Wind": "16.2 km/h",
+    "Humidity": "16%",
     "FeelsLike": "30.5°C"
   },
-  "DateTime": "2025-02-20 13:51:48"
+  "DateTime": "2025-02-20 16:35:13"
 }
 
