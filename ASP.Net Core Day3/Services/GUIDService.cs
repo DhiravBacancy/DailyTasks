@@ -19,7 +19,7 @@ public class SingletonGuidService : ISingletonGuidService
     public SingletonGuidService()
     {
         _guid = Guid.NewGuid().ToString();
-        Console.WriteLine($"Singleton instance created: {_guid}");
+        //Console.WriteLine($"Singleton instance created: {_guid}");
     }
 
     public string GetGuid()
@@ -35,7 +35,7 @@ public class ScopedGuidService : IScopedGuidService
     public ScopedGuidService()
     {
         _guid = Guid.NewGuid().ToString();
-        Console.WriteLine($"Scoped instance created: {_guid}");
+        //Console.WriteLine($"Scoped instance created: {_guid}");
     }
 
     public string GetGuid()
@@ -51,7 +51,7 @@ public class TransientGuidService : ITransientGuidService
     public TransientGuidService()
     {
         _guid = Guid.NewGuid().ToString();
-        Console.WriteLine($"Transient instance created: {_guid}");
+        //Console.WriteLine($"Transient instance created: {_guid}");
     }
 
     public string GetGuid()
