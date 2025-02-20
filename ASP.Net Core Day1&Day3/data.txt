@@ -1,0 +1,13 @@
+{
+  "Name": "Dhirav",
+  "City": "bangalore",
+  "Weather": {
+    "Temperature": "32.3°C",
+    "Condition": "Sunny",
+    "Wind": "13.3 km/h",
+    "Humidity": "28%",
+    "FeelsLike": "30.5°C"
+  },
+  "DateTime": "2025-02-20 13:51:48"
+}
+
