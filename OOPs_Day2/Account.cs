@@ -161,9 +161,3 @@ namespace OOPs_Day2
     }
 
 }
-
-
-
-
-//SavingsAccount(with interest calculation).
-//CurrentAccount(with overdraft limit).

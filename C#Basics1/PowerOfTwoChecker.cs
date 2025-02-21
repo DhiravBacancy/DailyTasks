@@ -1,26 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DailyTasks
 {
-    public class Task1
+    public class PowerOfTwoChecker
     {
-
         public void runTask()
         {
-
-            int[] numbers;
-            //User Input If you want 
             Console.WriteLine("Enter numbers separated by spaces:");
-            numbers = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
+            string[] input = Console.ReadLine().Split(' ');
 
-            //Hard Coded Input
-            //numbers = new int[] { 3, 4, 7, 16 }; // Example hardcoded input
+            List<int> numbersList = new List<int>();
 
+            foreach (string item in input)
+            {
+                if (int.TryParse(item, out int number))
+                {
+                    numbersList.Add(number);
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid input skipped: {item}");
+                }
+            }
 
+            int[] numbers = numbersList.ToArray();
 
             List<int> notPowersOfTwo = GetNotPowersOfTwo(numbers);
 
@@ -50,14 +54,7 @@ namespace DailyTasks
 
         static bool IsPowerOfTwo(int num)
         {
-            if (num <= 0) return false;
-            return (num & (num - 1)) == 0;
+            return num > 0 && (num & (num - 1)) == 0;
         }
     }
 }
-
-
-
-
-
-

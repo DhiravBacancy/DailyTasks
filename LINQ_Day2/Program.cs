@@ -12,7 +12,7 @@ namespace LINQ_Day2
             var (anotherCustomerList, anotherOrdersList) = Customer.customerList();
 
             //Customer.printCustomers(customerList);
-            //Customer.printCustomers(anotherCustomerList);
+            //Customer.printC ustomers(anotherCustomerList);
 
 
 

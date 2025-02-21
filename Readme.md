@@ -1,61 +1,32 @@
-# Daily Tasks
+# ASP.NET Core Training Tasks  
 
-
-### Task 1 - Check if All Numbers are Powers of Two.
-
-![](./outputs/Task1.png)
+## Overview
+This repository contains daily training tasks for learning .NET Core. Each task is organized by topic in its respective folder, covering various concepts of .NET Core development.
 
 ---
 
-### Task 2 - Create a while loop where the program continues to prompt for user input until a valid email address is entered. Validate the input using regex (use a basic regex pattern)
-
-![](./outputs/Task2.png)
-
----
-
-### Task 3 - Create a List<T> of value types, then box each value and store it in a List<object>. The program should not only box and unbox a single value type but also use collections (like List<T> or ArrayList) to store both boxed and unboxed values. Also use generic method that works with any value type (like int, double, or char) and boxes and unboxes the value.
-
-![](./outputs/Task3.png)
+### 🚀 **Technology Stack**  
+- .NET 8
+- C#  
+- Entity Framework Core (for ORM)  
+- ASP.NET Core (for web-based tasks)  
 
 ---
 
-### Task 4 -  Write a program where multiple threads try to write to the same resource (e.g., increment a shared variable). Use Mutex to ensure that only one thread can access the critical section at a time. Print the value of the shared variable after all threads have completed.
-![](./outputs/Task4.png)
+### 📌 **How to Run the Tasks**  
 
----
+### 1 Clone the repository:  
+```bash
+git clone https://github.com/your-repo-name.git
+cd Daily-Tasks
+```
 
-### Task 5 -  Banking System
-![](./outputs/Task5.png)
-
----
----
-
-# OOPs 
-### Task 1 - Banking System using OOPs concepts....
-![](./outputs/OOPsTask1.png) 
-
----
-
-### Task 2 - Banking System using OOPs concepts 2....
-![](./outputs/OOPsTask2.png)
-
----
-
-### Task 3 - SOLID Principle Application
-![](./outputs/OOPsTask3.png)
+### 2 Navigate to the root folder and open .sln file inside Visual Studio:  
 
 
 ---
----
 
-# LINQ
-### Task - 1 
-![](./outputs/LINQ_Task1A.png)
-![](./outputs/LINQ_Task1B.png)
+### Contact & Support  
+For any queries, reach out via dhirav.agrawal@bacancy.com or open an issue in the repository.  
 
----
-
-### Task - 2 
-![](./outputs/LINQ_Task2.png)
-
-
+Happy Coding! 
