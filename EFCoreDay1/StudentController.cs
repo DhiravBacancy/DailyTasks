@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using EnvironmentBasedApi.Data;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class StudentController : ControllerBase
 {
