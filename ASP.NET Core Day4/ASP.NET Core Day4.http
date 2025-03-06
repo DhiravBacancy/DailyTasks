@@ -1,6 +1,0 @@
-@ASP.NET_Core_Day4_HostAddress = http://localhost:5256
-
-GET {{ASP.NET_Core_Day4_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
