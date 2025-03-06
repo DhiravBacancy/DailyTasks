@@ -6,32 +6,32 @@ using System.Linq;
 
 namespace EFCoreWebApiWithoutDI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class EmployeesController : ControllerBase
     {
         private readonly AppDbContext _context;
 
         // Constructor
-        public ProductsController()
+        public EmployeesController()
         {
             _context = new AppDbContext(); // No DI, direct instantiation
         }
 
         // GET: api/products
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetProducts()
+        public ActionResult<IEnumerable<Employee>> GetEmployees()
         {
-            return _context.Products.ToList();
+            return _context.Employees.ToList();
         }
 
         // POST: api/products
         [HttpPost]
-        public ActionResult<Product> CreateProduct(Product product)
+        public ActionResult<Employee> CreateEmployee(Employee emp)
         {
-            _context.Products.Add(product);
+            _context.Employees.Add(emp);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
+            return CreatedAtAction(nameof(GetEmployees), new { id = emp.Id }, emp);
         }
     }
 }
