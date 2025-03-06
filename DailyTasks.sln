@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NET Core Day4", "ASP.NE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP.NET Core Day5(JWT)", "ASP.NET Core Day5(JWT)\ASP.NET Core Day5(JWT).csproj", "{14F8987D-51AC-6F1D-8F62-CF9FA4C3866C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreDay1", "EFCoreDay1\EFCoreDay1.csproj", "{F1BA8E58-6E8A-940B-E896-FB6B0D58D4F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{14F8987D-51AC-6F1D-8F62-CF9FA4C3866C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F8987D-51AC-6F1D-8F62-CF9FA4C3866C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F8987D-51AC-6F1D-8F62-CF9FA4C3866C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1BA8E58-6E8A-940B-E896-FB6B0D58D4F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1BA8E58-6E8A-940B-E896-FB6B0D58D4F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1BA8E58-6E8A-940B-E896-FB6B0D58D4F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1BA8E58-6E8A-940B-E896-FB6B0D58D4F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
