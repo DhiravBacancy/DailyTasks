@@ -7,7 +7,7 @@ namespace EnvironmentBasedApi.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 
-        // Rename this DbSet property to "Student" instead of "Products"
+      
         public DbSet<Student> Students { get; set; } // Changed from Products to Students
     }
 
