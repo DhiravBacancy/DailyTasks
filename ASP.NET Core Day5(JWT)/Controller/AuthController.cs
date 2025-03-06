@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JwtAuthApi.Controller
 {
 
-    [Route("api/auth")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -22,6 +22,7 @@ namespace JwtAuthApi.Controller
         [HttpPost("register")]
         public IActionResult Register([FromBody] User user)
         {
+            Console.WriteLine(123);
             var registeredUser = _authService.Register(user);
             return Ok($"User {registeredUser.Username} is registered");
         }
