@@ -57,7 +57,7 @@ Each loading strategy is implemented in its own controller.
 ### **Combined Loading Strategies**
 `GET /api/CombinedChallenges/CombinedQueries`
 - Demonstrates a combination of eager, lazy, and explicit loading for optimized performance.
-![](./Ouputs/4.png)
+![](./Outputs/4.png)
 
 ### **Eager Loading**
 `GET /api/EagerLoading/EagerLoadingQueries`
@@ -65,14 +65,14 @@ Each loading strategy is implemented in its own controller.
 - Filters Orders placed in the last 30 days and only includes Products with stock greater than 20.
 - Fetches Products along with the total number of Orders they are associated with.
 - Retrieves Orders placed in the last month, including Customers but excluding OrderProducts.
-![](./Ouputs/1.png)
+![](./Outputs/1.png)
 
 ### **Lazy Loading**
 `GET /api/LazyLoading/LazyLoadingQueries`
 - Demonstrates how accessing a navigation property triggers a database query.
 - Logs SQL queries to track performance.
 - Loads Orders only if their total amount exceeds $500.
-![](./Ouputs/2.png)
+![](./Outputs/2.png)
 
 ### **Explicit Loading**
 `GET /api/ExplicitLoading/ExplicitLoadingQueries`
@@ -80,5 +80,5 @@ Each loading strategy is implemented in its own controller.
 - Retrieves Orders without related OrderProducts but allows on-demand loading.
 - Retrieves Products and conditionally loads their associated Orders if the stock is below 10.
 - Fetches Customers eagerly with their Orders, then explicitly loads OrderProducts.
--![](./Ouputs/3.png)
+-![](./Outputs/3.png)
 ---
